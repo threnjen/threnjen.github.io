@@ -29,7 +29,7 @@ Now we move on to the brain teaser part. The host is going to open one of the do
 
 ![](https://i.imgur.com/is4rRDm.jpg)
 
-Here is the key to the problem. Our decision tree has fundamentally changed in the middle of the problem. Our choices have actually been reduced from three choices to two choices. Where before we had a potential path with three choices, there are now only actually two choices - keep our first choice, or switch.
+Here is the key to the problem. Our decision tree has fundamentally changed in the middle of the problem. Our choices have actually been reduced from nine overall outcomes to six. Where before each potential path had three choices, there are now only actually two choices - keep our first choice, or switch.
 
 ![](https://i.imgur.com/v6bYqmt.jpg)
 
