@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "A Simple Visual Explanation of the Monty Hall Problem"
-date:       2021-04-23 17:35:06 +0000
+date:       2021-04-23 13:35:07 -0400
 permalink:  a_simple_visual_explanation_of_the_monty_hall_problem
 ---
 
@@ -38,6 +38,10 @@ As we already know, *all possible choices add up to a 100% chance of something h
 ![](https://i.imgur.com/Ky3OZxS.jpg)
 
 Our chance of getting a car if we switch is now 2 in 3. **Switching is always the correct choice in the Monty Hall problem**
+
+It doesn't matter how large we scale our problem, although more doors makes the problem less intuitive. Here is an example with 7 doors. If we keep our original door choice, we have a 1/7 = 14.3% chance of getting a car. If we switch to another door once a choice has been removed, we have a 6/35 = 17.1% chance of getting a car. With more doors, the potential increase for a win is less. But the increase always exists when bad choices are removed, because our possible choice space gets smaller. In the 7 door example, when a choice is shown to us and removed, our total choices go from 42 to 35, and 6 of those 7 removed choices are guaranteed to improve our chances (the only one that does not is on the path where we chose the car as our first door).
+![](https://i.imgur.com/sZ7Mdyj.jpg)
+While this example is not nearly as intuitive as the 3-door example, it reinforces the rule - **Always switch!!!**
 
 
 
