@@ -5,6 +5,9 @@ date:       2021-04-27 14:26:09 -0400
 permalink:  i_made_a_model_how_do_i_use_it_-_beginning_data_science_part_1
 ---
 
+![](https://i.imgur.com/UvNR2p9.jpg)
+copyright: NBC
+
 
 There are SO MANY articles out there on model building. And with rare exception, each one ends right after they show a model has been produced and scored, leaving the neophyte user with a resounding "OK… but now what?" These are the gaps that technical writers don't fill, perhaps because this step is so obvious to them.
 
