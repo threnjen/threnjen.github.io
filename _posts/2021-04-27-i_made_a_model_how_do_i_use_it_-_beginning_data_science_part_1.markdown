@@ -42,7 +42,7 @@ y =  prepared_dataset['target_variable']
 Now we split up our data into train and test. Sklearn provides us with a very easy way to create this split. I'm using 20% for my test holdout, so I set test_size to .2
 ```
 from sklearn.model_selection import train_test_split
-X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2, random_state=randomstate)
+X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 You'll notice I name my training sets train_val. This is to remind myself that we are doing both training and validation on this set. We DO NOT touch our test set until our model is done.
 
