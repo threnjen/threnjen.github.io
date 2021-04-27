@@ -120,14 +120,14 @@ For R^2, we can go back to our scoring function from before. This time we show i
 model.score(X_test, test_predictions)
 ```
 
-When predicting values (like house prices), you can check Mean Absolute Error. This is the average of all of the errors of prediction minus actual, whether they are in a positive or negative direction.
+When predicting values (like house prices), you can check Mean Absolute Error. This is the average of the summed differences of prediction minus actual, whether they are in a positive or negative direction.
 Once again, be sure to use your unscaled/untransformed targets if you need to, in order to get the max information out of this error.
 ```
 mae = round(mean_absolute_error(y_test, test_predictions), 2)
 mae
 ```
 
-You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in prediction score better than big errors in prediction. 
+You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in prediction score better than big errors in prediction. This takes each difference of prediction minus actual and squares it, sums all of those squares, then takes the square root of the sum.
 ```
 rmse = round(np.sqrt(mean_squared_error(y_test, test_predictions)), 2)
 rmse
