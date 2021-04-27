@@ -163,5 +163,5 @@ The default for cross_val_score will return R^2, but if you want to explore othe
 
 Congratulations! You made a model on your train set, and used it to predict on your test set, as well as evaluated your errors.
 
-**## Next up in Part 2, we'll do something even more mysterious - use our model to predict on ALL NEW data.**
+## **Next up in Part 2, we'll do something even more mysterious - use our model to predict on ALL NEW data.**
 
