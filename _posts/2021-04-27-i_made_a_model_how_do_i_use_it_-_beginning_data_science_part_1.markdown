@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "I made a model! How do I use it? - Beginning Data Science, Part 1"
-date:       2021-04-27 18:26:08 +0000
+date:       2021-04-27 14:26:09 -0400
 permalink:  i_made_a_model_how_do_i_use_it_-_beginning_data_science_part_1
 ---
 
