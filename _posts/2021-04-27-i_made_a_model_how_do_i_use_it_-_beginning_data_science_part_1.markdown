@@ -127,7 +127,7 @@ mae = round(mean_absolute_error(y_test, test_predictions), 2)
 mae
 ```
 
-You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in prediction score better than big errors in prediction. This takes each difference of prediction minus actual and squares it, sums all of those squares, then takes the square root of the sum.
+You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in prediction score better than big errors in prediction. This takes each difference of prediction minus actual and squares it, takes the mean of the sum of those squares, then takes the square root of the mean.
 ```
 rmse = round(np.sqrt(mean_squared_error(y_test, test_predictions)), 2)
 rmse
