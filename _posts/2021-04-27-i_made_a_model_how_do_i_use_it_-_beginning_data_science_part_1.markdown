@@ -117,7 +117,7 @@ Now that you have predictions on your test data, you probably want to determine 
 
 For R^2, we can go back to our scoring function from before. This time we show it the test data to get a score, but it still uses the model built from the train data.
 ```
-model.score(X_test, y_test)
+model.score(X_test, test_predictions)
 ```
 
 When predicting values (like house prices), you can check Mean Absolute Error. This is the average of all of the errors of prediction minus actual, whether they are in a positive or negative direction.
