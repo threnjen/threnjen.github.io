@@ -50,14 +50,20 @@ You'll notice I name my training sets train_val. This is to remind myself that w
 
 Now it's time to unpack what each of our model commands does.
 ```
-model = LinearRegression() # This is where we specify what estimator we are using. There are lots!
+model = LinearRegression() 
+```
+This is where we specify what estimator we are using. There are lots!
 
-model.fit(X_train_val, y_train_val) # Right here is where the model is created - with the fit method. 
-# After this line executes, we have a completed model. 
-# We could stop right here and move on to predictions, but we want to know some scores first.
+```
+model.fit(X_train_val, y_train_val)
+```
+Right here is where the model is created - with the fit method. After this line executes, we have a completed model. We could stop right here and move on to predictions, but we want to know some scores first.
 
-model.score(X_train_val, y_train_val) # The R^2 score for our model, if it is simply trained on 
-# all of the X_train_val set and then comparing its predictions on the y_train_val actual values
+```
+model.score(X_train_val, y_train_val)
+```
+This will give us an R^2 score for our model, if it is simply trained on all of the X_train_val set and then comparing its predictions on the y_train_val actual values
+
 ```
 You've certainly heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always be using some form of cv to check your model, because then it is always training and predicting on different data.
 
