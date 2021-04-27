@@ -153,7 +153,11 @@ Now in an example, P(a) is 90 over actual and P(b) is 30 under actual. Your MAE 
 Root Mean Squared Error punishes larger errors more, resulting in a higher error score. You have to decide on what metric suits your data. If you have a lot of outliers, your model may perform better if you minimize RMSE. 
 
 In any case, pick the scoring metric you like. And here's a hint: You can actually change what kind of scoring you are looking at in your cross_val_score exploration, by changing the 'scoring' parameter. Like so:
-	cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5, scoring='neg_root_mean_squared_error')
+
+```
+cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5, scoring='neg_root_mean_squared_error')
+```
+	
 The default for cross_val_score will return R^2, but if you want to explore other scoring metrics, this is how you would change that. Sklearn has several, and great documentation. Check out https://scikit-learn.org/stable/modules/model_evaluation.html
 
 
