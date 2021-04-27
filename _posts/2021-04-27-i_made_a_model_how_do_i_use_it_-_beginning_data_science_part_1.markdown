@@ -26,11 +26,11 @@ We'll talk in this three-part series about three things:
 1. 	Part 2 - Using a model right now to make a brand new prediction
 1. 	Part 3 - Preparing the model to make predictions later, without having to make the model again
 
-## Using your model to make predictions on your holdout set
+## **Using your model to make predictions on your holdout set**
 
 We don't want to go all the way back to the beginning of model building in this writeup, so we're going to start at a point that assumes you have preprocessed your data and prepared it for the type of regression that you're performing. This involves importing your data, cleaning up bad/missing values, necessary scaling, and preparing your categorical/continuous variables. Different models may benefit from different levels or types of preprocessing, but that is outside the scope of this article. You are here, with a prepared dataset, ready to make a box, and hopefully to mysteriously convert things inside. We'll call our prepared dataset "prepared_dataset"
 
-### Making Your Model From Your Processed Data
+### **Making Your Model From Your Processed Data**
 
 If your model object is ready to predict with, you can skip this section. But, did you divide into train/test? Did you use cross validation on your training set? If the answer is no, or even if you are not sure WHY you did these things even if you DID do them, you might want to slow down and follow along with me.
 
@@ -68,7 +68,7 @@ Here's one of those "black box" notes that took me a while, and you may shake yo
 
 Are we happy? Are we ready to predict something? Great! It’s time to invite our test data back into the room!
 
-### Make Predictions on your Test Data
+### **Make Predictions on your Test Data**
 
 We invite our test data back into the game now that our model is done. Time to make a prediction!
 ```
