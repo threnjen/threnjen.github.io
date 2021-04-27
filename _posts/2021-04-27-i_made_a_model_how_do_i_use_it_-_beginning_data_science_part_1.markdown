@@ -85,6 +85,7 @@ I like to organize my predictions vs my actual in a dataframe, but that's certai
 predicted_prices = pd.DataFrame({"Actual": y_test, "Predicted": test_predictions)})
 predicted_prices
 ```
+![](https://i.imgur.com/SjDmZLe.png)
 
 If you scaled your target variable, you might want to do some stuff here to unscale it. For example, in the notebook I worked with for this example, all of my prices were log transformed. So my data frame creation was actually like this:
 	
@@ -141,6 +142,7 @@ sns.distplot(test_predictions, hist=True, kde=False)
 plt.legend(labels=['Actual Values of Price', 'Predicted Values of Price'])
 plt.xlim(0,);
 ```
+![](https://i.imgur.com/SSdzzMA.png)
 
 Congratulations! You made a model on your train set, and used it to predict on your test set, as well as evaluated your errors.
 
