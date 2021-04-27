@@ -27,15 +27,15 @@ We'll talk in this three-part series about three things:
 
 # **Using your model to make predictions on your holdout set**
 
-We don't want to go all the way back to the beginning of model building in this writeup, so we're going to start at a point that assumes you have preprocessed your data and prepared it for the type of regression that you're performing. This involves importing your data, cleaning up bad/missing values, necessary scaling, and preparing your categorical/continuous variables. Different models may benefit from different levels or types of preprocessing, but that is outside the scope of this article. You are here, with a prepared dataset, ready to make a box, and hopefully to mysteriously convert things inside. We'll call our prepared dataset "prepared_dataset"
+We don't want to go all the way back to the beginning of model building in this writeup, so we're going to start at a point that assumes you have preprocessed your data and prepared it for the type of regression that you're performing. This includes importing your data, cleaning up bad/missing values, necessary scaling, and preparing your categorical/continuous variables. Different models may benefit from different levels or types of preprocessing, but that is outside the scope of this article. You are here, with a prepared dataset, ready to make a box, and hopefully to mysteriously convert things inside. We'll call our prepared dataset "prepared_dataset"
 
 ## **Making Your Model From Your Processed Data**
 
-If your model object is totally ready to predict with, you can skip this section. But, did you divide into train/test? Did you use cross validation on your training set? If the answer is no, or even if you did these things but do not understand WHY,  you might want to slow down and follow along with me.
+If your model is built and ready to predict with, you can skip this section. But, did you divide into train/test? Did you use cross validation on your training set? If the answer is no, or even if you did these things but do not understand WHY,  you might want to slow down and follow along with me.
 
-If you didn't divide into train/test, it's time for your first few steps back. You're going to use 70-80% of your data to make your model. The remaining percentage is your holdout data, and you will not touch it until your model is ready to test. This is because we can't use our targets to help us predict our same targets. That is very bad data science. Your BARE MINIMUM of preparation is to create a train/test split. Now mentally put the test set aside for a while. 
+If you didn't divide into train/test, it's time for your first few steps back. You're going to use 70-80% of your data to make your model. The remaining percentage is your holdout data, and you will not touch it until your model is ready to test. This is because we can't use our targets to help us predict our same targets. That is very bad data science. Your bare minimum of preparation is to create a train/test split. Now mentally put the test set aside for a while. 
 
-If your dataframe has the target variable as one of the columns, we need to pull that out. In order to fit, the model needs separate X and y inputs. X is all of your predictors, and y holds only your target dependent variable.
+If your dataframe has the target variable as one of the columns, we need to pull that out. The modeler needs separate X and y inputs. X is all of your predictors, and y holds only your target dependent variable.
 ```
 X = prepared_dataset.drop('target_variable', axis=1)
 y =  prepared_dataset['target_variable']
@@ -51,7 +51,7 @@ Now it's time to unpack what each of our model commands does.
 ```
 model = LinearRegression() 
 ```
-This is where we specify what estimator we are using. There are lots!
+This is where we specify what estimator we are using. There are many to learn about, but the basic steps to fit a model are the same.
 
 ```
 model.fit(X_train_val, y_train_val)
@@ -61,18 +61,18 @@ Right here is where the model is created - with the fit method. After this line 
 ```
 model.score(X_train_val, y_train_val)
 ```
-This will give us an R^2 score for our model, if it is simply trained on all of the X_train_val set and then comparing its predictions on the y_train_val actual values
+This will give us an R^2 score for our model, if it is simply trained on all of the X_train_val set and then comparing its predictions to the y_train_val actual values
 
-You've certainly heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, as in the code above, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always be using some form of cv to check your model, so that the model is always training and predicting on different data.
+You've heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, as in the code above, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always be using some form of cv to check your model, so that the model is always training and predicting on different data chunks.
 
-You'll set your cv variable to the number of partitions, and then your train_val X and y sets will be divided into that many partitions.  For each partition z, the model will train on the other partitions and test against z, returning an R^2 score for that partition. Then you can either check the entire array of scores or, for an average of all of their performance, check the mean score.
+You'll set your cv variable to the number of partitions, and then your train_val X and y sets will be divided into that many partitions.  For each partition z, the model will train on all of the other partitions and test against z, returning an R^2 score for that partition. Then you can either check the entire array of scores or, for an average of all of their performance, check the mean score.
 
 ```
 cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5) # a more robust way
 r2 = cv_5.mean()
 ```
 
-Here's one of those "black box" notes that took me a while, and you may shake your head and say "well, that's obvious". It was not to me. Cross Validation is not ALTERING your model in any way. It is not an optimization function. All it is doing is saying "here is how your model performs, if we make a bunch of train/test sets from your training data". It is up to YOU to re-tune the model, if possible/desirable. Then run your CV again, and repeat until you are happy with the results.
+Here's one of those "black box" notes that took me a while, and you may shake your head and say "well, that's obvious". It was not to me. Cross Validation is not ALTERING your model in any way. It is not an optimization function. All it is doing is reporting "here is how your model performs, if we make a bunch of train/test sets from your training data". It is up to YOU to re-tune the model, if possible/desirable. Then run your CV again, and repeat until you are happy with the results.
 
 Are we happy? Are we ready to predict something? Great! It’s time to invite our test data back into the room!
 
@@ -84,9 +84,10 @@ Time to make a prediction on our test data!
 test_predictions = model.predict(X_test)
 ```
 
-That's it. Test_predictions is now an array of predictions. You probably want to do something useful with them and check how well our model did now that it was confronted with all new data.
+That's it. We stuffed something into our box and it spit something back out. We pressed the Slice button! 
+test_predictions is now an array of predictions. You probably want to do something useful with the predictions and check how well our model did now that it was confronted with all new data.
 
-I like to organize my predictions vs my actual in a dataframe, but it's not necessary.
+I like to organize my predictions vs my actuals in a dataframe, but it's not necessary.
 
 ```
 predicted_prices = pd.DataFrame({"Actual": y_test, "Predicted": test_predictions)})
@@ -125,7 +126,7 @@ mae = round(mean_absolute_error(y_test, test_predictions), 2)
 mae
 ```
 
-You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in prediction score better than big errors in prediction. This takes each difference of prediction minus actual and squares it, takes the mean of the sum of those squares, then takes the square root of the mean.
+You can also use RMSE, which is the Root Mean Squared Error. This one is a better metric to penalize BIG errors, meaning small errors in predictions will score better than big errors in predictions. This takes each difference of prediction minus actual and squares it, takes the mean of the sum of those squares, then takes the square root of the mean.
 ```
 rmse = round(np.sqrt(mean_squared_error(y_test, test_predictions)), 2)
 rmse
@@ -143,7 +144,7 @@ plt.xlim(0,);
 
 ### Understanding MAE vs RMSE
 
-Here's a way to understand the difference between MAE and RMSE, and why you might want to use one over the other.
+Here's a way to understand the difference between Mean Absolute Error and Root Mean Squared Error, and why you might want to use one over the other.
 
 Let's say you have just two data points a and b, and you've made predictions. In example 1, P(a) is 70 over actual, and P(b) is 50 under actual. Your Mean Absolute Error here is 60. It's very straightforward - it's the average of the predictions minus actuals. Your Root Mean Squared Error is sqrt( (70^2 + 50^2)/2 )=60.8276253029822  
 
