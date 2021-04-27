@@ -75,7 +75,7 @@ Are we happy? Are we ready to predict something? Great! It’s time to invite ou
 
 We invite our test data back into the game now that our model is done. Time to make a prediction!
 ```
-	test_predictions = model.predict(X_test)
+test_predictions = model.predict(X_test)
 ```
 That's it. Test_predictions is now an array of predictions. You probably want to do something useful with them and check how well our model did now that it was confronted with all new data.
 
@@ -88,17 +88,17 @@ predicted_prices
 
 If you scaled your target variable, you might want to do some stuff here to unscale it. For example, in the notebook I worked with for this example, all of my prices were log transformed. So my data frame creation was actually like this:
 	
-	```
-	# get our actual prices reverse log transformed
-	test_actual = np.exp(y_test)
+```
+# get our actual prices reverse log transformed
+test_actual = np.exp(y_test)
 	
-	# reverse log transform our predicted values
-	test_predictions_unscaled = np.exp(test_predictions)
+# reverse log transform our predicted values
+test_predictions_unscaled = np.exp(test_predictions)
 
-	# compare our predicted values to the actual values
-	predicted_prices_basiclr = pd.DataFrame({"Actual": test_actual, "Predicted": test_predictions_unscaled})
-	predicted_prices_basiclr
-	```
+# compare our predicted values to the actual values
+predicted_prices_basiclr = pd.DataFrame({"Actual": test_actual, "Predicted": test_predictions_unscaled})
+predicted_prices_basiclr
+```
 
 
 
