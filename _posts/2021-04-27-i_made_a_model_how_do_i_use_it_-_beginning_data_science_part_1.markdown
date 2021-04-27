@@ -30,7 +30,7 @@ We don't want to go all the way back to the beginning of model building in this 
 
 ## **Making Your Model From Your Processed Data**
 
-If your model object is totally ready to predict with, you can skip this section. But, did you divide into train/test? Did you use cross validation on your training set? If the answer is no, or even if you are not sure WHY you did these things even if you DID do them, you might want to slow down and follow along with me.
+If your model object is totally ready to predict with, you can skip this section. But, did you divide into train/test? Did you use cross validation on your training set? If the answer is no, or even if you did these things but do not understand WHY,  you might want to slow down and follow along with me.
 
 If you didn't divide into train/test, it's time for your first few steps back. You're going to use 70-80% of your data to make your model. The remaining percentage is your holdout data, and you will not touch it until your model is ready to test. This is because we can't use our targets to help us predict our same targets. That is very bad data science. Your BARE MINIMUM of preparation is to create a train/test split. Now mentally put the test set aside for a while. 
 
