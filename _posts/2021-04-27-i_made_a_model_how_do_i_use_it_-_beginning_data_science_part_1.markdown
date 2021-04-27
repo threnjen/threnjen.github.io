@@ -155,7 +155,9 @@ In any case, pick the scoring metric you like. And here's a hint: You can actual
 cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5, scoring='neg_root_mean_squared_error')
 ```
 	
-The default for cross_val_score will return R^2, but if you want to explore other scoring metrics, this is how you would change that. Sklearn has several, and great documentation. Check out https://scikit-learn.org/stable/modules/model_evaluation.html
+The default for cross_val_score will return R^2, but if you want to explore other scoring metrics, this is how you would change that. Sklearn has several, and great documentation. Check out [Sklearn Scoring Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html).
+
+
 
 
 
