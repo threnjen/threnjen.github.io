@@ -8,9 +8,9 @@ permalink:  i_made_a_model_how_do_i_use_it_-_beginning_data_science_part_1
 
 There are SO MANY articles out there on model building, for every type of model. And each and every one, with rare exceptions, stops right at the point after they show a model has been produced and scored - and then the article ends. Leaving the neophyte user with a resounding "OK… now what?"
 
-	• I made a model. How do I predict something?? And what do I predict with?
-	• How do I use the model RIGHT NOW to make a totally new prediction?
-	• How do I prepare the model for use later without having to re-produce the model?
+*  I made a model. How do I predict something?? And what do I predict with?
+*  How do I use the model RIGHT NOW to make a totally new prediction?
+*  How do I prepare the model for use later without having to re-produce the model?
 	
 These are the gaps that technical writers aren't filling, perhaps because this step is something that they have done so many times that it is just obvious to them.
 
@@ -22,9 +22,9 @@ And this is where so many articles and lessons fail to bridge the gap between th
 
 We'll talk in this three-part series about three things:
 
-	1) Part 1 - Using your model to make predictions on your holdout set
-	2) Part 2 - Using a model right now to make a brand new prediction
-	3) Part 3 - Preparing the model to make predictions later, without having to make the model again
+1. 	Part 1 - Using your model to make predictions on your holdout set
+1. 	Part 2 - Using a model right now to make a brand new prediction
+1. 	Part 3 - Preparing the model to make predictions later, without having to make the model again
 
 ## Using your model to make predictions on your holdout set
 
