@@ -133,6 +133,15 @@ In any case, pick the scoring metric you like. And here's a hint: You can actual
 	cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5, scoring='neg_root_mean_squared_error')
 The default for cross_val_score will return R^2, but if you want to explore other scoring metrics, this is how you would change that. Sklearn has several, and great documentation. Check out https://scikit-learn.org/stable/modules/model_evaluation.html
 
+We also might want to visualize our model's predictions versus actuals. Keep in mind the example is for my data.
+```
+plt.figure(figsize=(10,5))
+sns.distplot(y_test, hist=True, kde=False)
+sns.distplot(test_predictions, hist=True, kde=False)
+plt.legend(labels=['Actual Values of Price', 'Predicted Values of Price'])
+plt.xlim(0,);
+```
+
 Congratulations! You made a model on your train set, and used it to predict on your test set, as well as evaluated your errors.
 
 ### Next up in Part 2, we'll do something even more mysterious - use our model to predict on ALL NEW data.
