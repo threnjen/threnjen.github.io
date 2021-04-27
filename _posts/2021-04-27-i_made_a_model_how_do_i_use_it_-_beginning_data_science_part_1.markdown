@@ -64,15 +64,16 @@ model.score(X_train_val, y_train_val)
 ```
 This will give us an R^2 score for our model, if it is simply trained on all of the X_train_val set and then comparing its predictions on the y_train_val actual values
 
-```
 You've certainly heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always be using some form of cv to check your model, because then it is always training and predicting on different data.
 
 Whatever you set your cv variable to, your train_val X and y sets will be divided into that many partitions, and for each partition z, the model will train on the other partitions and test against z, returning an R^2 score for that partition. Then you can either check the entire array of scores or, for an average of all of their performance, check the mean score.
+
 ```
 cv_5 = cross_val_score(model, X_train_val, y_train_val, cv=5) # a more robust way
 r2 = cv_5.mean()
 r2
 ```
+
 Here's one of those "black box" notes that took me a while, and you may shake your head and say "well, that's obvious". But it was not to me. Cross Validation is not ALTERING your model in any way. It is not an optimization function. All it is doing is saying "here is how your model performs, if we make a bunch of train/test sets from your training data". It is up to YOU to re-tune the model, if possible/desirable. Then run your CV again, and repeat until you are happy with the results.
 
 Are we happy? Are we ready to predict something? Great! It’s time to invite our test data back into the room!
@@ -80,9 +81,11 @@ Are we happy? Are we ready to predict something? Great! It’s time to invite ou
 ## **Make Predictions on your Test Data**
 
 We invite our test data back into the game now that our model is done. Time to make a prediction!
+
 ```
 test_predictions = model.predict(X_test)
 ```
+
 That's it. Test_predictions is now an array of predictions. You probably want to do something useful with them and check how well our model did now that it was confronted with all new data.
 
 I like to organize my predictions vs my actual in a dataframe, but that's certainly optional.
@@ -91,6 +94,7 @@ I like to organize my predictions vs my actual in a dataframe, but that's certai
 predicted_prices = pd.DataFrame({"Actual": y_test, "Predicted": test_predictions)})
 predicted_prices
 ```
+
 ![](https://i.imgur.com/SjDmZLe.png)
 
 If you scaled your target variable, you might want to do some stuff here to unscale it. For example, in the notebook I worked with for this example, all of my prices were log transformed. So my data frame creation was actually like this:
