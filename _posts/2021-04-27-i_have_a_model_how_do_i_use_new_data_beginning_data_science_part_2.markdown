@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "I have a model! How do I use new data? Beginning Data Science, Part 2"
+title:      "I have a model! How do I use new data? Beginning Model Building, Part 2"
 date:       2021-04-27 20:32:43 -0400
 permalink:  i_have_a_model_how_do_i_use_new_data_beginning_data_science_part_2
 ---
@@ -238,7 +238,7 @@ Test_parameters
  'renovated_1.0': 1}
  ```
 
-We have a dictionary that has the parameters that we want to update in our test frame. Now we'll apply it to our test frame that we prepared earlier.
+Now we'll apply it to our test frame that we prepared earlier.
 
 ```
 for item in test_parameters:
