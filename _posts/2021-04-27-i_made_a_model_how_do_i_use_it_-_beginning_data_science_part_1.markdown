@@ -12,7 +12,7 @@ copyright: NBC
 There are SO MANY articles out there on model building. And with rare exception, each one ends right after they show a model has been produced and scored, leaving the neophyte user with a resounding "OK… but now what?" These are the gaps that technical writers don't fill, perhaps because this step is so obvious to them.
 
 *  I made a model. How do I predict something?? And what do I predict with?
-*  How do I use the model RIGHT NOW to make a totally new prediction?
+*  How do I use the model RIGHT NOW to make a totally new prediction? Join me in [Part 2](https://threnjen.github.io/i_have_a_model_how_do_i_use_new_data_beginning_data_science_part_2)
 *  How do I prepare the model for use later without having to re-produce the model?
 	
 An anecdote. My partner was working for the first time with a 3D Printer. He was using the correct software and doing all of the things that the tutorials showed for setting up an item to print. And then he was stuck on the "now what?" spot. How did he get the cleaned and prepared file into the right format to put into the 3d Printer? It turned out that all he needed to do was hit a button called "Slice", which in context, tells the program to "slice" the 3d object into the thousands of layers that are printed on the printer one-by-one. And to a veteran user of 3d printers and software, this step is very obvious. SO obvious, that no tutorial says "Hey - now click SLICE in order to take your theoretical finished object into a real finished object that you can use."
@@ -165,5 +165,5 @@ The default for cross_val_score will return R^2, but if you want to explore othe
 
 Congratulations! You made a model on your train set, and used it to predict on your test set, as well as evaluated your errors.
 
-## **Next up in Part 2, we'll do something even more mysterious - use our model to predict on ALL NEW data.**
+## **Next up in [Part 2](https://threnjen.github.io/i_have_a_model_how_do_i_use_new_data_beginning_data_science_part_2), we'll do something even more mysterious - use our model to predict on ALL NEW data.**
 
