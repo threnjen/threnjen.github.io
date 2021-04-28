@@ -191,6 +191,7 @@ for item in high_card_cat:
 ### **Flag our dichotomous categoricals**
 
 Dichotomous categoricals get named with the same conventions as the high cardinality ones, but since there is only a yes or no option, only a "yes" column should exist for them, in whatever format. Check the format, then write code that flags that column if you entered a yes.
+
 ```
 for item in dichotomous:
     if dichotomous[item]:
@@ -213,6 +214,7 @@ def age_block_finder(year, bins):
 
 lower_year, upper_year = age_block_finder(year_built, year_bins)
 ```
+
 I then use those bounds to first find out if this predictor is in our data frame at all, and if it is, to flag it as a 1. Once again, I'll need to check my data frame for the formatting of the column label. Remember that the column label itself is  a string, so we need to find it in a very literal manner.
 
 ```
@@ -269,5 +271,4 @@ predicted_price
 ```
 
 And, since we were kind to ourselves and set up functions to properly place our respective features, we can come back to this notebook any time and make new predictions with a minimum of effort.
-
 
