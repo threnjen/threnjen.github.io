@@ -103,6 +103,7 @@ My example data has several different categories of data, although at this junct
 All of this data will need to be prepped in a manner similar to preprocessing for your model, with the added step of adding it into the correct place in your predictor data frame.
 
 * Continuous numerical data. This data will need to be log transformed and then standardized. I'll leave myself a comment even though these should be straightforward
+
 ```
  # these should all be numbers
 sqft_living = 1960
@@ -111,6 +112,7 @@ bedrooms = 4
 ```
 
 * Ordinal data, where higher is better. I need to make sure I leave myself excellent documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
+
 ```
  # The description here is: Overall property condition
  # The choices here are: Poor, Okay, Average, Good, Excellent range 1-5
@@ -124,6 +126,7 @@ grade = 5
 ```
 
 * Dichotomous categoricals, meaning they are only a yes or a no. I could take an extra step and allow myself to write 'yes' or 'no' for these spots and then interpret, but I can also leave myself a reminder that 1 is yes and 0 is no.
+
 ```
  # 1 for yes or 0 for no
 waterfront = 0
@@ -132,6 +135,7 @@ basement = 0
 ```
 
 * High-cardinality categoricals that correspond directly to a one-hot encoding. I will write functions to find and change the relevant encoding flags to 1 for these entries. If there is any uncertainty on format, I should leave myself a comment.
+
 ```
 zipcode = 98136
 month = 12 # Month should be a number for the month 1=January  to 12=December
