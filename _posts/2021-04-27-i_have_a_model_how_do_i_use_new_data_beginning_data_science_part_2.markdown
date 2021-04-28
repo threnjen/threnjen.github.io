@@ -152,6 +152,7 @@ We're building some dictionaries from this data to process quicker.
 continuous = {'sqft_living':sqft_living, 'sqft_lot':sqft_lot, 'bedrooms':bedrooms, 'condition':condition, 'grade':grade}
 dichotomous = {'waterfront':waterfront, 'renovated':renovated, 'basement':basement}
 high_card_cat = {'zipcode': zipcode, 'month':month}
+binned = {'year_built':year_built}
 ```
 
 
@@ -255,11 +256,81 @@ test_frame
 ```
 ![](https://i.imgur.com/ta7Cip3.png)
 
+## Pulling all of the above together into ONE function
+
+We can pull all of the above elements together into a single function. We pass it our dictionaries of variables, our year and lat bins, and the column names for our predictors. 
+
+
+```
+def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns):
+
+    # create an empty dictionary to store our parameters
+    test_parameters = {}
+    
+    # create our predictor data frame full of 0s
+    test_frame = pd.DataFrame(0, index=range(1), columns=columns)
+
+    # standardize and store our continuous variables
+    for item in continuous:
+        test_parameters[item] = standardize_continuous(item, continuous[item])
+    
+    # This code first checks if the column we want is in our data frame. If the column is there, it changes it to a 1.
+    for item in high_card_cat:
+        if item+'_'+str(high_card_cat[item]) in test_frame.columns:
+            test_parameters[item+'_'+str(high_card_cat[item])] = 1
+        
+    # This code first checks if the column we want is in our data frame. If the column is there, it changes it to a 1.
+    for item in dichotomous:
+        if dichotomous[item]:
+            test_parameters[item+'_1.0']=1
+
+    # for our categoricals, not all are used in our model. For each categorical that we would create with our entered data,
+    # we check first and see if it's in our model at all. If so we flag it as a 1, otherwise it is ignored.
+
+    # function to find lower and upper bin bounds for our age blocks
+    def age_block_finder(year, bins):
+        for i in range(len(bins)):
+            if year > bins[i] and year < bins[i+1]:
+                lower_year, upper_year = bins[i], bins[i+1]
+            else: continue
+        return lower_year, upper_year
+
+    # function to find lower and upper bin bounds for our latitude blocks
+    def lat_block_finder(lat, bins):
+        for i in range(len(bins)):
+            if lat_round > bins[i] and lat_round < bins[i+1]:
+                lower_lat, upper_lat = round(bins[i], 3), round(bins[i+1], 3)
+            else: continue
+        return lower_lat, upper_lat
+
+
+    lower_year, upper_year = age_block_finder(year_built, year_bins) # lower and upper bounds for our age block
+    lower_lat, upper_lat = lat_block_finder(lat_round, lat_bins) # lower and upper bounds for our latitude block
+
+    # Find the correct bin for our year built
+    if 'year_block_('+str(lower_year)+', '+str(upper_year)+']' in test_frame.columns:
+        test_parameters['year_block_('+str(lower_year)+', '+str(upper_year)+']'] = 1
+
+    # find the correct bin for our latitude
+    if 'lat_block_('+str(lower_lat)+', '+str(upper_lat)+']' in test_frame.columns:
+        test_parameters['lat_block_('+str(lower_lat)+', '+str(upper_lat)+']'] = 1
+        
+    # enter all of our predictors into our predictor frame
+    for item in test_parameters:
+        value = test_parameters[item]
+        test_frame[item] = value
+    
+		# send the predictor frame to the model and get a result
+    predicted_price = int(np.exp(final_model.predict(test_frame)))    
+    
+    return predicted_price
+		```
+
 ## Make a prediction with new data!
 
 The moment has come! We're going to put something TOTALLY NEW in our box and it's going to give us something back!
 ```
-predicted_price = final_model.predict(test_frame)
+predicted_price = predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns)
 ```
 
 ![](https://i.imgur.com/GTXLco6.jpg)
@@ -274,5 +345,5 @@ predicted_price
 384005
 ```
 
-And, since we were kind to ourselves and set up functions to properly place our respective features, we can come back to this notebook any time and make new predictions with a minimum of effort.
+And, since we were kind to ourselves and set up functions to properly place our respective features, we can come back to this notebook any time and make new predictions with a minimum of effort, as well as use the function on a larger csv with multiple new entries.
 
