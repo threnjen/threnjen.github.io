@@ -320,7 +320,8 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, 
         value = test_parameters[item]
         test_frame[item] = value
     
-		# send the predictor frame to the model and get a result
+		# send the predictor frame to the model and get a result. I need to reverse-log-transform my output
+		# price for readability, but this will depend if you log-transformed your target.
     predicted_price = int(np.exp(final_model.predict(test_frame)))    
     
     return predicted_price
@@ -331,19 +332,13 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, 
 The moment has come! We're going to put something TOTALLY NEW in our box and it's going to give us something back!
 ```
 predicted_price = predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns)
+
+384005
 ```
 
 ![](https://i.imgur.com/GTXLco6.jpg)
 
 Predict is such a magic button. 
-
-Make sure that if you need to, you reverse transform your prediction. In my example my target price was log transformed, so I actually wrote this in order to get a usable number back out:
-```
-predicted_price = int(np.exp(final_model.predict(test_frame)))
-predicted_price
-
-384005
-```
 
 And, since we were kind to ourselves and set up functions to properly place our respective features, we can come back to this notebook any time and make new predictions with a minimum of effort, as well as use the function on a larger csv with multiple new entries.
 
