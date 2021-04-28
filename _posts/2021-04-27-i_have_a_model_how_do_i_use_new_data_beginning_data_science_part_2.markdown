@@ -81,53 +81,64 @@ Our model expects to see new data with the same predictor variables with which t
 
 First we need to set up a dataframe that has all possible predictors included and with all predictors set to 0. This will ensure that our default one-hot-encoding flags are all set to 0, so that we only have to change the relevant entries to a 1.
 
+We define our columns using the predictor set that we used to train our final model. In my case that was X.
+
 ```
 test_frame = pd.DataFrame(0, index=range(1), columns=X.columns)
 test_frame
 ```
 ![](https://i.imgur.com/k8erfwr.png)
 
-This next part is going to require you to write good documentation for yourself to use later. You're going to set up a section in your code to enter your new predictors. Here is where you'll need to make decisions about what kind of usability you want to integrate. Do you want to write yourself a fancy input GUI? Do you want to have to think a lot about the format of the values that you need to enter? My suggestion is to follow this plan to set up your data entry space:
+This next part is going to require you to write good documentation for yourself to use later. You're going to set up a section in your code to enter your new predictors. Here is where you'll need to make decisions about what kind of usability you want to integrate. Do you want to write yourself a fancy input GUI? How much do you want to think about the format of the values that you need to enter later on? My suggestion is to follow these guidelines to set up your data entry space:
 	
 * Make it only as complicated as needed
-* 	Avoid unnecessary GUI elements unless you need them or someone else will use the tool
-* Write comments on all of the inputs to remind yourself what to enter
-* When possible, use the most intuitive input, or the input type closest to the data you have, or have a conversion function already prepared
+* Avoid unnecessary GUI elements unless you need them or someone else will use the tool
+* Write comments on all of the inputs to remind yourself what to enter. More comments is better. Better to over-explain to yourself than under-explain.
+* When possible, use the most intuitive input, or the input type closest to the data you will have, or have a conversion function already prepared
 * Keep your data entry area as neat and tidy as possible, to avoid confusing yourself when you approach it later
 
 We'll look at ways to tackle these problems.
 
-My example data has several different types of things. I have plain old numerical continuous data. I have numerical data that will become a one-hot encoded flag. I have dichotomous one-hot encoded data which is either yes/no. And I have numerical data which will be sorted into a bin, which is the most complicated type I'll be presenting.
+My example data has several different categories of data, although at this juncture it is all numerical. I have plain old numerical continuous data. I have numerical data that is actually categorical and will become a one-hot encoded flag. I have dichotomous one-hot encoded data which is either yes/no. And I have numerical data which will be sorted into a bin, which is the most complicated type I'll be presenting.
 
-In my example, here are all of my variables that I use, and how I will need to use each one:
+All of this data will need to be prepped in a manner similar to preprocessing for your model, with the added step of adding it into the correct place in your predictor data frame.
 
-Continuous numerical data. This data will need to be log transformed and then standardized.
+* Continuous numerical data. This data will need to be log transformed and then standardized. I'll leave myself a comment even though these should be straightforward
 ```
+# these should all be numbers
 sqft_living = 1960
 sqft_lot = 5000
 bedrooms = 4
 ```
 
-Ordinal data, where higher is better. I need to make sure I leave myself documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
+* Ordinal data, where higher is better. I need to make sure I leave myself excellent documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
 ```
+# The description here is: Overall property condition
+# The choices here are: Poor, Okay, Average, Good, Excellent
+# provide examples to indicate that this variable indicates property repair/maintenance level, not quality of materials
 condition = 3
+
+# Give examples within each category so they can make a best guess. Ex. Low Quality - Linoleum >20 yrs old, Laminate counters
+# ex. continued - Very High Quality - crown moulding, solid slab granite. 
+# provide examples to allow proper selection of grade
 grade = 5
 ```
 
-These are my dichotomous categoricals, meaning they are only a yes or a no. I could take an extra step and allow myself to write 'yes' or 'no' for these spots and then interpret, but I can also leave myself a reminder that 1 is yes and 0 is no.
+* Dichotomous categoricals, meaning they are only a yes or a no. I could take an extra step and allow myself to write 'yes' or 'no' for these spots and then interpret, but I can also leave myself a reminder that 1 is yes and 0 is no.
 ```
+# 1 for yes or 0 for no
 waterfront = 0
 renovated = 1
 basement = 0
 ```
 
-These are high-cardinality categoricals that correspond directly to a one-hot encoding. I will write functions to find and change the relevant encoding flags to 1 for these entries.
+* High-cardinality categoricals that correspond directly to a one-hot encoding. I will write functions to find and change the relevant encoding flags to 1 for these entries. If there is any uncertainty on format, I should leave myself a comment.
 ```
 zipcode = 98136
-month = 12
+month = 12 # Month should be a number for the month 1=January  to 12=December
 ```
 
-This is a one-hot encoded categorical that I binned into intervals. For this entry I will need to find the interval that the entry belongs to, and then change the relevant bin entry to a 1.
+* Binned categoricals. This is a one-hot encoded categorical that I binned into intervals. For this entry I will need to find the interval that the entry belongs to, and then change the relevant bin entry to a 1.
 ```
 year_built = 1965
 
@@ -140,8 +151,7 @@ high_card_cat = {'zipcode': zipcode, 'month':month}
 ```
 
 
-
-We're going to save all of our new parameters to a dictionary test_parameters, then apply that to our test_frame. 
+We're going to save all of our new parameters to a dictionary test_parameters, then apply that to our test_frame dataframe. 
 
 ### **Transform and standardize our continuous variables** 
 
