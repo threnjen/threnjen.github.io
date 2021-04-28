@@ -142,6 +142,7 @@ month = 12 # Month should be a number for the month 1=January  to 12=December
 ```
 
 * Binned categoricals. This is a one-hot encoded categorical that I binned into intervals. For this entry I will need to find the interval that the entry belongs to, and then change the relevant bin entry to a 1.
+
 ```
 year_built = 1965
 ```
@@ -254,6 +255,7 @@ for item in test_parameters:
 
 test_frame
 ```
+
 ![](https://i.imgur.com/ta7Cip3.png)
 
 ## **Pulling all of the above together into ONE function**
@@ -320,8 +322,8 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, 
         value = test_parameters[item]
         test_frame[item] = value
     
-		# send the predictor frame to the model and get a result. I need to reverse-log-transform my output
-		# price for readability, but this will depend if you log-transformed your target.
+	 # send the predictor frame to the model and get a result. I need to reverse-log-transform my output
+	 # price for readability, but this will depend if you log-transformed your target.
     predicted_price = int(np.exp(final_model.predict(test_frame)))    
     
     return predicted_price
