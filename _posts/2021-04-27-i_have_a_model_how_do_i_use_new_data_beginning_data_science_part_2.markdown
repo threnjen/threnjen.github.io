@@ -104,28 +104,29 @@ All of this data will need to be prepped in a manner similar to preprocessing fo
 
 * Continuous numerical data. This data will need to be log transformed and then standardized. I'll leave myself a comment even though these should be straightforward
 ```
-# these should all be numbers
+ # these should all be numbers
 sqft_living = 1960
 sqft_lot = 5000
 bedrooms = 4
 ```
 
 * Ordinal data, where higher is better. I need to make sure I leave myself excellent documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
+* 
 ```
-# The description here is: Overall property condition
-# The choices here are: Poor, Okay, Average, Good, Excellent range 1-5
-# provide examples to indicate that this variable indicates property repair/maintenance level, not quality of materials
+ # The description here is: Overall property condition
+ # The choices here are: Poor, Okay, Average, Good, Excellent range 1-5
+ # provide examples to indicate that this variable indicates property repair/maintenance level, not quality of materials
 condition = 3
 
-# Give examples within each category so they can make a best guess. Ex. Low Quality - Linoleum >20 yrs old, Laminate counters
-# ex. continued - Very High Quality - crown moulding, solid slab granite. 
-# provide examples to allow proper selection of grade range 1-10
+ # Give examples within each category so they can make a best guess. Ex. Low Quality - Linoleum >20 yrs old, Laminate counters
+ # ex. continued - Very High Quality - crown moulding, solid slab granite. 
+ # provide examples to allow proper selection of grade range 1-10
 grade = 5
 ```
 
 * Dichotomous categoricals, meaning they are only a yes or a no. I could take an extra step and allow myself to write 'yes' or 'no' for these spots and then interpret, but I can also leave myself a reminder that 1 is yes and 0 is no.
 ```
-# 1 for yes or 0 for no
+ # 1 for yes or 0 for no
 waterfront = 0
 renovated = 1
 basement = 0
