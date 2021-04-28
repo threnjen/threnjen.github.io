@@ -111,7 +111,6 @@ bedrooms = 4
 ```
 
 * Ordinal data, where higher is better. I need to make sure I leave myself excellent documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
-* 
 ```
  # The description here is: Overall property condition
  # The choices here are: Poor, Okay, Average, Good, Excellent range 1-5
@@ -141,9 +140,10 @@ month = 12 # Month should be a number for the month 1=January  to 12=December
 * Binned categoricals. This is a one-hot encoded categorical that I binned into intervals. For this entry I will need to find the interval that the entry belongs to, and then change the relevant bin entry to a 1.
 ```
 year_built = 1965
-
 ```
+
 We're building some dictionaries from this data to process quicker.
+
 ```
 continuous = {'sqft_living':sqft_living, 'sqft_lot':sqft_lot, 'bedrooms':bedrooms, 'condition':condition, 'grade':grade}
 dichotomous = {'waterfront':waterfront, 'renovated':renovated, 'basement':basement}
