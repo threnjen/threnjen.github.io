@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "I have a model! How do I use new data? Beginning Data Science, Part 2"
-date:       2021-04-28 00:32:42 +0000
+date:       2021-04-27 20:32:43 -0400
 permalink:  i_have_a_model_how_do_i_use_new_data_beginning_data_science_part_2
 ---
 
@@ -49,6 +49,8 @@ for item in df_continuous:
     standardization_coeffs[item+'_std'] = df_continuous[item].std()
 
 print(standardization_coeffs)
+
+{'sqft_living_mean': 7.487264646488237, 'sqft_living_std': 0.3868656778159048, 'sqft_lot_mean': 8.751422942498527, 'sqft_lot_std': 0.6052323520926731, 'bedrooms_mean': 1.161988952164995, 'bedrooms_std': 0.28071365873779, 'condition_mean': 1.2099855036820262, 'condition_std': 0.18008256313016827, 'grade_mean': 2.003972468584745, 'grade_std': 0.13169146539316434}
 ```
 
 I've made a nice dictionary of standardization coefficients that I can call on to standardize this kind of data. And although we'll talk more later about saving our model assets for later use, I'll mention that I export this to a csv.
