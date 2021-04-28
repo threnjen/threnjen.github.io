@@ -343,7 +343,7 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned):
 The moment has come! We're going to put something TOTALLY NEW in our box and it's going to give us something back!
 
 ```
-predicted_price = predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns)
+predicted_price = predict_from_one(continuous, dichotomous, high_card_cat, binned)
 
 384005
 ```
