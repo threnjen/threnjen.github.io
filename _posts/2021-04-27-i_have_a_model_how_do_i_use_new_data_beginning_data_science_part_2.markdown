@@ -256,7 +256,7 @@ test_frame
 ```
 ![](https://i.imgur.com/ta7Cip3.png)
 
-## Pulling all of the above together into ONE function
+## **Pulling all of the above together into ONE function**
 
 We can pull all of the above elements together into a single function. We pass it our dictionaries of variables, our year and lat bins, and the column names for our predictors. 
 
@@ -325,11 +325,12 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, 
     predicted_price = int(np.exp(final_model.predict(test_frame)))    
     
     return predicted_price
-		```
+```
 
-## Make a prediction with new data!
+## **Make a prediction with new data!**
 
 The moment has come! We're going to put something TOTALLY NEW in our box and it's going to give us something back!
+
 ```
 predicted_price = predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns)
 
