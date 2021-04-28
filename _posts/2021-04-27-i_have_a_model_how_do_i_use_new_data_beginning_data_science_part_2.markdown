@@ -258,13 +258,22 @@ test_frame
 
 ![](https://i.imgur.com/ta7Cip3.png)
 
+Now Call predict with our model on the test frame, and we have our prediction.
+
+```
+final_model.predict(test_frame)
+
+384005
+```
+
 ## **Pulling all of the above together into ONE function**
 
-We can pull all of the above elements together into a single function. We pass it our dictionaries of variables, our year and lat bins, and the column names for our predictors. 
+We can pull all of the above elements together into a single function. We pass it our dictionaries of variables. We have available our year and lat bins, and the column names for our predictors.  These are either saved earlier in our notebook, or we saved these variables when we exported our model for later use (Part 3!)
 
 
 ```
-def predict_from_one(continuous, dichotomous, high_card_cat, binned, year_bins, lat_bins, columns):
+
+def predict_from_one(continuous, dichotomous, high_card_cat, binned):
 
     # create an empty dictionary to store our parameters
     test_parameters = {}
