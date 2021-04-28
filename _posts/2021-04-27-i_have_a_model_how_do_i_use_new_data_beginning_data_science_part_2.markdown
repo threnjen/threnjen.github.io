@@ -17,12 +17,13 @@ But no one teaches us how to use our model to make NEW predictions with entirely
 
 If we scaled our features when building our model, it should seem obvious that we must scale our features to use the model. How does this work persistently? While we are told TO scale our features, we are never shown HOW that works across feature sets. Because imagine this - you have your initial data which you have standardized using the sklearn StandardScaler black box function. We want to make new predictions with all new data. How do we scale a single point of data, when scaling by its nature involves accessing all of the data to determine a distribution?
 
-**We can do this one of two ways:**
+**We can do this in a couple of ways:**
 
 * Using StandardScaler/MinMaxScaler by understanding how their use creates an object that we can apply to other data, or
 * Write our own standardization function and save our function variables for later application
+* Some other way that is outside the scope of this article
 
-Either of these methods is acceptable. Our own standardization function is less opaque and "black box" than an sklearn scaler, but will involve more code writing on our part.
+We'll use the first two methods and either of these methods is acceptable. Our own standardization function is less opaque and "black box" than an sklearn scaler, but will involve more code writing on our part.
 
 To use StandardScaler or MinMaxScaler, we need only a few lines.
 ```
@@ -30,7 +31,7 @@ scaler = StandardScaler()
 scaler.fit(X_train_val)
 ```
 
-Just like when we used the fit method on our model, we now have a scaler object. We can apply this object to other sets of data or even single data points and it will be scaled using the scale stored in the object. We would now apply this scaler to our train and test sets:
+Just like when using the fit method made our model spring into existence, we now have a scaler object. We can apply this object to other sets of data or even single data points and it will be scaled using the scale stored in the object. We would now apply this scaler to our train and test sets:
 ```
 X_train_val_scaled = scaler.transform(x_train_val)
 X_test_scaled = scaler.transform(x_test)
@@ -72,7 +73,7 @@ def standardize_continuous(key, value):
 
 ```
 
-Using either an sklearn scaler or your own custom scaler is a valid choice. It just depends if you want brevity versus transparency.
+Using either a black box scaler or your own custom scaler is a valid choice. It just depends if you want brevity versus transparency.
 
 
 ## **Our second obstacle - How do we feed new data into our model?**
@@ -93,11 +94,9 @@ This next part is going to require you to write good documentation for yourself 
 	
 * Make it only as complicated as needed
 * Avoid unnecessary GUI elements unless you need them or someone else will use the tool
-* Write comments on all of the inputs to remind yourself what to enter. More comments is better. Better to over-explain to yourself than under-explain.
-* When possible, use the most intuitive input, or the input type closest to the data you will have, or have a conversion function already prepared
+* Write comments on all of the inputs to remind yourself what to enter. More comments is better. Better to over-explain to future you than under-explain.
+* When possible, use the most intuitive input, or the input type closest to the data you will have, or have a conversion function already prepared so that you don't have to spend extra time pre-processing your new data
 * Keep your data entry area as neat and tidy as possible, to avoid confusing yourself when you approach it later
-
-We'll look at ways to tackle these problems.
 
 My example data has several different categories of data, although at this juncture it is all numerical. I have plain old numerical continuous data. I have numerical data that is actually categorical and will become a one-hot encoded flag. I have dichotomous one-hot encoded data which is either yes/no. And I have numerical data which will be sorted into a bin, which is the most complicated type I'll be presenting.
 
@@ -114,13 +113,13 @@ bedrooms = 4
 * Ordinal data, where higher is better. I need to make sure I leave myself excellent documentation on these entries so that I know what the numbers mean when I come back to this model. This data will also be transformed and standardized.
 ```
 # The description here is: Overall property condition
-# The choices here are: Poor, Okay, Average, Good, Excellent
+# The choices here are: Poor, Okay, Average, Good, Excellent range 1-5
 # provide examples to indicate that this variable indicates property repair/maintenance level, not quality of materials
 condition = 3
 
 # Give examples within each category so they can make a best guess. Ex. Low Quality - Linoleum >20 yrs old, Laminate counters
 # ex. continued - Very High Quality - crown moulding, solid slab granite. 
-# provide examples to allow proper selection of grade
+# provide examples to allow proper selection of grade range 1-10
 grade = 5
 ```
 
