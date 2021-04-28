@@ -222,6 +222,8 @@ if 'year_block_('+str(lower_year)+', '+str(upper_year)+']' in test_frame.columns
 
 ### **Prepare our new prediction data frame**
 
+We now have a dictionary of the test parameters that we'll plug into our test_frame data frame.
+
 ```
 Test_parameters
 
