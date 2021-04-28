@@ -63,7 +63,7 @@ model.score(X_train_val, y_train_val)
 ```
 This will give us an R^2 score for our model, if it is simply trained on all of the X_train_val set and then comparing its predictions to the y_train_val actual values
 
-You've heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, as in the code above, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always be using some form of cv to check your model, so that the model is always training and predicting on different data chunks.
+You've heard of cross validation. This is a much stronger way to determine how well your model is performing, because it creates multiple train/test partitions INSIDE your train_val set. When you test your model without any partitions, as in the code above, you're both creating and predicting on the same data. As we already mentioned earlier - it's bad data science to train and predict on the same data because it means we use our targets to predict themselves. You should always train and predict on different data chunks. Use cv as well whenever appropriate and possible.
 
 You'll set your cv variable to the number of partitions, and then your train_val X and y sets will be divided into that many partitions.  For each partition z, the model will train on all of the other partitions and test against z, returning an R^2 score for that partition. Then you can either check the entire array of scores or, for an average of all of their performance, check the mean score.
 
@@ -148,7 +148,7 @@ Here's a way to understand the difference between Mean Absolute Error and Root M
 
 Let's say you have just two data points a and b, and you've made predictions. In example 1, P(a) is 70 over actual, and P(b) is 50 under actual. Your Mean Absolute Error here is 60. It's very straightforward - it's the average of the predictions minus actuals. Your Root Mean Squared Error is sqrt( (70^2 + 50^2)/2 )=60.8276253029822  
 
-Now in an example, P(a) is 90 over actual and P(b) is 30 under actual. Your MAE is STILL 60, because that's still your averaged error. Your RMSE is  different though - sqrt( (90^2 + 30^2)/2 )=-67.08203932499369 
+Now in an example, P(a) is 90 over actual and P(b) is 30 under actual. Your MAE is STILL 60, because that's still your averaged error. Your RMSE is  different though - sqrt( (90^2 + 30^2)/2 )=67.08203932499369 
 Root Mean Squared Error punishes larger errors more, resulting in a higher error score on this prediction set. You have to decide on what metric suits your data. If you have a lot of outliers, your model may perform better if you minimize RMSE. 
 
 In any case, pick the scoring metric you like. And here's a hint: You can actually change what kind of scoring you are looking at in your cross_val_score exploration, by changing the 'scoring' parameter. Like so:
