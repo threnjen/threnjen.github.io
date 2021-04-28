@@ -274,29 +274,34 @@ We can pull all of the above elements together into a single function. We pass i
 ```
 
 def predict_from_one(continuous, dichotomous, high_card_cat, binned):
-
-    # create an empty dictionary to store our parameters
+    """Takes in a series of dictionaries with predictive variables. Pre-processes the variables
+    to conform with model predictors. Runs model on submitted predictors and returns a prediction."""
+    
+    # create an empty dictionary to store our predictor parameters
     test_parameters = {}
     
     # create our predictor data frame full of 0s
     test_frame = pd.DataFrame(0, index=range(1), columns=columns)
 
-    # standardize and store our continuous variables
+    # standardize and store our continuous variables in our predictor dictionary
     for item in continuous:
         test_parameters[item] = standardize_continuous(item, continuous[item])
     
-    # This code first checks if the column we want is in our data frame. If the column is there, it changes it to a 1.
+    # for our categoricals, not all are used in our model. For each categorical that we would create with our entered data,
+    # we check first and see if it's in our model at all. If the column is there, it stores
+    # the predictor in our predictor dictionary as a 1, otherwise it is ignored.
+    
+    # This code first checks if the column we want is in our data frame. If the column is there, it stores
+    # this predictor in our predictor dictionary as a 1
     for item in high_card_cat:
         if item+'_'+str(high_card_cat[item]) in test_frame.columns:
             test_parameters[item+'_'+str(high_card_cat[item])] = 1
         
-    # This code first checks if the column we want is in our data frame. If the column is there, it changes it to a 1.
+    # This code first checks if the column we want is in our data frame. If the column is there, it stores
+    # this predictor in our predictor dictionary as a 1
     for item in dichotomous:
         if dichotomous[item]:
             test_parameters[item+'_1.0']=1
-
-    # for our categoricals, not all are used in our model. For each categorical that we would create with our entered data,
-    # we check first and see if it's in our model at all. If so we flag it as a 1, otherwise it is ignored.
 
     # function to find lower and upper bin bounds for our age blocks
     def age_block_finder(year, bins):
@@ -314,27 +319,29 @@ def predict_from_one(continuous, dichotomous, high_card_cat, binned):
             else: continue
         return lower_lat, upper_lat
 
-
+    # find the lower and upper bounds for age block and lat block
     lower_year, upper_year = age_block_finder(year_built, year_bins) # lower and upper bounds for our age block
     lower_lat, upper_lat = lat_block_finder(lat_round, lat_bins) # lower and upper bounds for our latitude block
 
-    # Find the correct bin for our year built
+    # This code first checks if the column we want is in our data frame. If the column is there, it stores
+    # this predictor in our predictor dictionary as a 1
     if 'year_block_('+str(lower_year)+', '+str(upper_year)+']' in test_frame.columns:
         test_parameters['year_block_('+str(lower_year)+', '+str(upper_year)+']'] = 1
 
-    # find the correct bin for our latitude
+    # This code first checks if the column we want is in our data frame. If the column is there, it stores
+    # this predictor in our predictor dictionary as a 1
     if 'lat_block_('+str(lower_lat)+', '+str(upper_lat)+']' in test_frame.columns:
         test_parameters['lat_block_('+str(lower_lat)+', '+str(upper_lat)+']'] = 1
         
-    # enter all of our predictors into our predictor frame
+    # enter all of our predictors into our predictor data frame
     for item in test_parameters:
         value = test_parameters[item]
         test_frame[item] = value
     
-	 # send the predictor frame to the model and get a result. I need to reverse-log-transform my output
-	 # price for readability, but this will depend if you log-transformed your target.
+    # send the predictor data frame to the model and get a prediction
     predicted_price = int(np.exp(final_model.predict(test_frame)))    
     
+    # return the prediction
     return predicted_price
 ```
 
