@@ -6,7 +6,7 @@ permalink:  create_an_awesome_map_viz_without_a_geo-visualization_package
 ---
 
 
-![](https://unsplash.com/photos/_SFJhRPzJHs)
+![](https://i.imgur.com/3FdXLIQ.jpg)
 Photo by <a href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">NASA</a> on <a href="https://unsplash.com/s/photos/map?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 
