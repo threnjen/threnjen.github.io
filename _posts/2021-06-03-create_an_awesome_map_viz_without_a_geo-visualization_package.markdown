@@ -6,6 +6,10 @@ permalink:  create_an_awesome_map_viz_without_a_geo-visualization_package
 ---
 
 
+![](https://unsplash.com/photos/_SFJhRPzJHs)
+Photo by <a href="https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">NASA</a> on <a href="https://unsplash.com/s/photos/map?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
 When I work with real estate data, I find I do one particular task right when I open the data set, which is make a geo-visualization of the data. I do this without the use of any complicated packages or shapefiles. Not only is it a great way to visualize the physical space in which my housing set lives, but I can use this visualization to see other elements that might inform my target. All I need is Seaborn and a dataset with some lat/long information.
 
 I start by loading my relevant packages and load my data set. In this example I'm using the King County housing dataset.
