@@ -37,11 +37,9 @@ This only works with a dataset that has lat/long, but it works amazingly. Watch 
 
 plt.figure(figsize=(25,25))
 
-ax = sns.scatterplot(data=df, x="long", y="lat", palette="magma_r");
+ax = sns.scatterplot(data=df, x="long", y="lat", palette="magma_r")
 
-# save visualization to png
-plt.savefig("tutorial/plain_map.png")
-plt.show()
+plt.show();
 ```
 
 ![](https://imgur.com/cM4gRMH.png)
@@ -89,18 +87,30 @@ As a side note - don't use these ranks in your model, at least not before you sp
 Now we'll make the same map plot as before, but this time we'll color the map using our zip ranks.
 
 ```
-
-# plotting latitude and longitude as a visual scatter plot to look for location outliers
-
 plt.figure(figsize=(25,25))
 
-ax = sns.scatterplot(data=df, x="long", y="lat", hue='zip_rank', palette="magma_r");
+ax = sns.scatterplot(data=df, x="long", y="lat", hue='zip_rank', palette="magma_r")
 
-# save visualization to png
-plt.savefig("tutorial/colored_map.png")
-plt.show()
+# Add title to legend
+ax.legend(title='Zip Rank', title_fontsize=30, fontsize=24)
+
+plt.show();
 ```
 
 ![](https://i.imgur.com/0XctWSX.png)
 
-Just like that, we can clearly visualize the importance of location to our housing prices, and we've made a useful visualization while we're at it, all without using any fancy packages or shapefiles!
+We can show even MORE information on our map if we try, although at this scale, it might be difficult to see much. But here is the same map yet again with another dimension, using our "grade" attribute to determine the size of our scatter dots.
+
+```
+plt.figure(figsize=(25,25))
+
+
+ax = sns.scatterplot(data=df, x="long", y="lat", hue='zip_rank', size='grade', palette="magma_r")
+# Add title to legend
+ax.legend(title='Zip Rank', title_fontsize=24, fontsize=20)
+
+plt.show();
+```
+![](https://i.imgur.com/INjaTVM.png)
+
+Just like that, we can clearly visualize the importance of location to our housing prices, and we've made a useful visualization while we're at it, all without using any additional packages or shapefiles! All we needed was our basic packages of pandas, numpy, matplotlib and seaborn.
