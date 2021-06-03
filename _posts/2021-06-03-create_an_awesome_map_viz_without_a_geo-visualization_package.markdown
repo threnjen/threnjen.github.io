@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "Create an Awesome Map Viz Without a Geo-Visualization Package"
+title:      "Create a Map Viz Without a Geo-Visualization Package"
 date:       2021-06-03 14:47:33 -0400
 permalink:  create_an_awesome_map_viz_without_a_geo-visualization_package
 ---
